@@ -43,7 +43,7 @@ PY_XIAOMI_GATEWAY = None
 _LOGGER = logging.getLogger(__name__)
 
 ATTR_RINGTONE_ID = 'ringtone_id'
-ATTR_GW_IP = 'gw_ip'
+ATTR_GW_IP_ADD = 'gw_ip'
 ATTR_RINGTONE_VOL = 'ringtone_vol'
 
 def setup(hass, config):
@@ -103,7 +103,7 @@ def setup(hass, config):
            return
 
         ring_id = int(call.data.get(ATTR_RINGTONE_ID))
-        gw_ip = call.data.get(ATTR_GW_IP)
+        gw_ip = call.data.get(ATTR_GW_IP_ADD)
 
         if ring_id in [9, 14-19]:
             _LOGGER.error('Specified mid: %s is not defined in gateway', mid)
@@ -124,7 +124,7 @@ def setup(hass, config):
 
     def stop_ringtone_service(call):
         """Service to stop playing ringtone on Gateway."""
-        gw_ip_add = call.data.get(ATTR_GW_IP_ADD)
+        gw_ip = call.data.get(ATTR_GW_IP_ADD)
         if gw_ip is None:
            _LOGGER.error("Mandatory parameters is not specified")
            return
